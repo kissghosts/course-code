@@ -1,0 +1,9 @@
+[submodule "dist-sys-project-2013"]
+	path = dist-sys-project-2013
+	url = https://github.com/kissghosts/dist_sys_project_2013.git
+[submodule "network-programming-2013/project"]
+	path = network-programming-2013/project
+	url = https://github.com/kissghosts/network_project_2013.git
+[submodule "data-mining-2013"]
+	path = data-mining-2013
+	url = https://github.com/kissghosts/data_mining_2013.git
