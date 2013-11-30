@@ -1,0 +1,103 @@
+582303 Network Programming
+==========================
+
+Exercise 2  (due January 30, 2013):
+
+1. On page 138 in the course book (Fig 5.11) is an improved version of
+   the signal handling for SIGCHLD signal (also available on slide 39).
+   This version solves the problem due to the lack of signal queuing,
+   but is still not quite correct solution in a general case. What is
+   the problem involved with this signal handler. Can you improve the
+   solution to make it safe for general use. If possible, give two
+   alternative solutions.
+
+
+2. Extend the simple fork program (see below) as follows (NOTE: make 
+   sure that you successfully complete the task 6 of exercise 1 before
+   testing your program and use an idle workstation/computer, if 
+   possible, to test your program. See also the note below):
+ 
+   a) Add necessary error checking, change output so that system call
+      write() is employed for output (hint: see man sprintf) and 
+      necessary information is added to the printout so that you know 
+      which process prints each of the output lines.
+
+   b) Modify the program so that exactly five processes will execute
+      the for-loop.
+
+   c) [Optional] Number of rounds in the for-loop is given as a 
+      command line argument (default is 10 rounds).
+
+
+-----------------------------------------------------------------
+
+/* simple fork example 1 */
+#include <stdio.h>
+main()
+{
+        int i; 
+        fork();
+        for  (i = 1; i <= 5; i++)
+           printf(" i = %d \n", i );
+        exit(0);
+}
+------------------------------------------------------------------
+
+
+3. Extend the simple fork example above further as follows:
+
+   a) The program is given a file path name as command line argument
+      and, in addition, optionally one command line argument. The 
+      parent process will execute the for loop, but the child process 
+      calls function int do_child(char *path, char *arg). The file name
+      that was given as a command line argument is passed to the 
+      do_child() function in parameter 'path' and the additional 
+      command line argument in parameter 'arg'.
+
+   b) Write function int do_child(char *path, char *arg) that executes a
+      program (see man 2 execve). The path name of the executable file
+      for the program is given in the parameter 'path'. Take care of
+      appropriate error checking and output layout.
+
+   Test the program with different command line argument values, but be
+   careful in choosing which program file name to give as the command
+   line argument (e.g., using program "echo", full pathname /bin/echo,
+   is a safe choice). You may also write a small test program of your
+   own for the testing purposes.
+
+
+4. What information within the process context a child process
+   'inherits' from its parent in fork() system call? All possible
+   details are not needed, but make sure that any issues related to the
+   use of files, pipes and other special devices becomes clear.
+
+
+5. a) How do the variants of the exec call differ from each other?
+      (that is, execve() and its front ends: execl(), execlp(), 
+      execle(), etc.)
+
+   a) What information in process context is changed (or remains the
+      same) when a process calls exec() system call?
+   
+
+6.  Write a program with two processes: reader and doubler. The reader
+    process reads lines from standard input and sends these lines to the
+    doubler process through a pipe. The doubler process duplicates each
+    line to the standard output (that is, writes each line twice). Use
+    unnamed Unix pipes for IPC.
+
+
+Comment clearly all your program code and test it!
+
+NOTE1: Programs that use fork() system call are prohibited to test on
+       the "main frame" Unix computers of the IT department (i.e.,
+       kruuna, myntti, mutteri...) as well as on the "main frame" Unix 
+       computers of the CS department (i.e., melkki, melkinkari and 
+       melkinpaasi). 
+       Preferably use a computer at the CS department that you sitting 
+       at. For testing, also remember to add a sleep call before each 
+       the fork call in your program.
+
+NOTE2: Remember that in order to pass the course you need to complete
+       at least 1/3 of the exercise tasks. See the course web page
+       for further information.

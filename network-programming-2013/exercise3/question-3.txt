@@ -1,0 +1,4 @@
+mkfifo fifo1
+mkfifo fifo2
+./doubler < fifo2 & ./converter < fifo1 > fifo2 & ./reader > fifo1
+rm fifo*

@@ -1,0 +1,126 @@
+582303 Network Programming
+==========================
+
+Exercise 5 (due on Feb 20, 2013):            
+
+
+1. Install the example programs of the UNIX Network Programming, Vol 1   
+   by Stevens in a Linux system (into your home directory). A gzip'ed      
+   tar archive is available at   
+
+   http://www.cs.helsinki.fi/u/kojo/vst/unpv13e.tar.gz
+
+   The package includes installing instructions (README). Do not bother
+   installing libraries: 
+   libroute 
+   libxti 
+
+   Compile and run "daytimetcpcli" program as instructed, but note that
+   when testing the daytimecli program at the Department of Computer
+   Science in the University of Helsinki, use the daytime server on
+   host "ukko177.hpc.cs.helsinki.fi" (IP-address 86.50.20.178). Other 
+   hosts at the department do not run the daytime server.
+
+
+2. a) Modify the example program by Stevens for the TCP daytime server
+      (intro/daytimetcpsrv1.c) to use port 49999. Why is this
+      modification needed to run the server? Modify the original TCP
+      daytime client program (intro/daytimetcpcli.c) accordingly. Test
+      the client and server operation.
+
+   b) Remove the listen call in the server and run the programs. What 
+      happens (in the client, in the server, at the TCP layer)? Why?
+
+   c) Restore the listen call in the server code but this time remove
+      the bind call. What happens now (in client/in server)? Why?
+
+   d) Modify TCP daytime client (intro/daytimetcpcli.c) to connect the
+      modified server (task 2 a) several times in a single run. Give the
+      number of connections as a command line argument and use the
+      programs to figure out how the Unix system seems to allocate port
+      numbers in the client. Try also running two client programs
+      simultaneously on the same computer.
+
+
+3. Write a simple concurrent TCP echo server and connect to it with your
+   own echo client (e.g., you may modify the client in the task 4 of
+   Exercise 4). Select the port number for the server yourself in the
+   range 50000-51999. The client reads from stdin and delivers the data
+   to the server that echoes it back. The client writes the data that it
+   receives as reply from the server to sdtout and only then reads the
+   next line from stdin.
+
+   a) When the client has connected to the server, kill the master
+      server using an appropriate signal (e.g., SIGINT), but make sure
+      that the TCP connection between the client and server child
+      process is still open (client and server are running). What
+      happens in the client and what happens at the TCP layer?
+
+   b) After killing the master server, restart it immediately. What 
+      happens in the restarted master server? Why? How should you 
+      program the server to be prepared to this problem and thereby
+      solve it?
+
+   c) Now try the following: when the client has connected to the
+      server, kill the servers (both the master and slave) using 
+      an appropriate signal (e.g., SIGINT). What happens in the 
+      client and what happens at the TCP layer?
+
+   d) After killing the servers as instructed above in c), restart
+      the master server immediately. What happens now? Why? (Hint: 
+      look at the  TCP state diagram on page 41 in Stevens book) 
+      How can you program the server to be  prepared to this 
+      problem and thereby solve it?
+
+
+4. Write a simple TCP client and server where the client reads data from
+   standard input and sends the data to the server. The server writes
+   the data it receives to standard output. (You may base the code
+   on the programs of task 1 of Exercise 4, for example)
+
+   a) Test your programs and then modify the client to close
+      the read direction and the server to close the write direction
+      of the connection immediately after the connection has been
+      established (use shutdown() call). Does the program operation
+      change? Why/Why not? What happens at the TCP layer?
+
+   b) Next modify the server to close the read direction of the 
+      connection either immediately or after receiving some data
+      (and stops reading, of course).
+      Make sure that the client, however, continues sending data.
+      What happens now in the client / in the server / at the TCP
+      layer? 
+
+   c) Modify the server to close both the read and write direction of
+      the connection either immediately or after receiving some data.
+      Again, make sure that the client, however, continues sending data.
+      What happens now in the client/ in the server / at the TCP layer?
+      How should this kind of situation be taken into account in the 
+      client code?
+
+
+5. a) How does TCP layer react at a server host when a TCP SYN segment
+      arrives at the server but the backlog queue of the listen socket
+      is full. How is this visible in the client application that is 
+      trying to connect the server?
+
+   b) Write the required code to experimentally find out the relation
+      between the backlog argument of listen() call and the actual
+      maximum number of TCP connection requests awaiting in the backlog
+      queue. Compare your results with those given in Stevens book
+      (Figure 4.10, page 108).
+
+
+6. Modify the daytimetcpcli program (Stevens UNPv1: figure 11.5;
+   intro/daytimetcpcli.c) so that it first finds out how much data
+   there is waiting to be received before it reads the data away 
+   from the socket receive buffer. (Hint: see MSG_PEEK flag and 
+   ioctl & FIONREAD, try both of these).
+
+
+NOTE: A special programming task takes place on February 28 - March 11,
+      2013. Make sure you allocate enough time to complete this task
+      during those days. Try to allocate your time towards the beginning
+      of the period. The amount of effort needed roughly equals to three
+      times the effort needed to complete a regular weekly exercise
+      set. The task will be announced on Wednesday, February 20, 2013.

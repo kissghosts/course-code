@@ -1,0 +1,29 @@
+2 b) server: accept error: Invalid argument
+     not in stage of LISTEN, can not accept
+  c) client: connect error: Connection refused
+     the server use *:53095(changing, random port) to initial the connection, so if the client change to the right port,
+     the connection can be established.
+  d) continuously, range from 32768 ~ 61000
+
+3 a) nothing happens to the client and TCP layer
+  b) binding error: Address already in use
+     parent should kill the child process before terminating?
+  c) client does not know server has beed closed, client's TCP state stays in 
+     CLOSE_WAIT(no appl: close, can not be closed), Server in FIN_WAIT_2
+     if client tries to send data, nothing will be received.
+  d) binding error: Address already in usen FIN_WAIT_2
+     server -- FIN_WAIT_1 -- FIN_WAIT_2 -- TIME_WAIT -- CLOSED
+
+4 b) nothing happened?
+  c) the connection has been closed at the begining:
+     use netstat -a | grep '50011' to check
+     tcp 0 0 localhost:50011 localhost:56499 FIN_WAIT2  
+     tcp 1 0 localhost:56499 localhost:50011 CLOSE_WAIT
+     
+     when the client tries to write, it will receive a SIGPIPE
+     signal, which will stop the program.
+
+5 a) If the queues are full when a client SYN arrives, TCP ignores the arriving SYN (pp. 930–931 of TCPv2); it does not send an RST. This is because the condition is considered temporary, and the client TCP will retransmit its SYN, hopefully finding room on the queue in the near future. If the server TCP immediately responded with an RST, the client's connect would return an error, forcing the application to handle this condition instead of letting TCP's normal retransmission take over. Also, the client could not differentiate between an RST in response to a SYN meaning "there is no server at this port" versus "there is a server at this port but its queues are full."
+
+    in Linux, there are some differences, check the man page of listen(2)
+   b) 0~4, 1~5, 2~6 ..? 

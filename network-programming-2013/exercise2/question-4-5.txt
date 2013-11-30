@@ -1,0 +1,54 @@
+man fork(2):
+* The child inherits copies of the parent's set of open file descript-
+  ors. Each file descriptor in the child refers to the same open file 
+  description (see open(2)) as the corresponding file descriptor in 
+  the parent. This means that the two descriptors share open file sta-
+  tus flags, current file offset, and signal-driven I/O attributes (see 
+  the description of F_SETOWN and F_SETSIG in fcntl(2)).
+
+* The child inherits copies of the parent's set of open message  queue
+  descriptors  (see  mq_overview(7)).   Each  descriptor  in the child
+  refers to the same open message queue description as the correspond‐
+  ing  descriptor  in the parent.  This means that the two descriptors
+  share the same flags (mq_flags).
+
+* The child inherits copies of the  parent's  set  of  open  directory
+  streams  (see opendir(3)).  POSIX.1-2001 says that the corresponding
+  directory streams in the parent and child may  share  the  directory
+  stream positioning; on Linux/glibc they do not.
+
+Advanced Programming in the UNIX Environment:
+* Real user ID, real group ID, effective user ID, effective group ID
+* Supplementary group ID
+* Process group ID
+* Session ID
+* Controlling terminal
+* The set-user-ID and set-group-ID flags
+* Current working directory
+* Root directoru
+* File mode creation mask
+* Signal mask and dispositions
+* The close-on-exec flag for any open file descriptors
+* Environment
+* Attached shared memory segments
+* Memory mappings
+* Resource limits
+
+
+
+question 5. b)
+* Process ID and parent process ID
+* Real user ID, real group ID
+* Supplementary group ID
+* Process group ID
+* Session ID
+* Controlling terminal
+* Time left until alarm clock
+* Current working directory
+* Root directoru
+* File mode creation mask
+* File locks
+* Process signal mask
+* Pending signals
+* Resource limits
+* Values fro tms_utime, tms_stime, tms_cutime, and tms_cstime

@@ -1,0 +1,85 @@
+582303 Network Programming
+==========================
+
+Exercise 3  (Due on February 6, 2013)
+
+
+1. Modify your reader-doubler program of the previous exercise (Task
+   No:6 of the Exercice 2) so that the code for the doubler (child
+   process) is in a separate program file, i.e., employ exec() system
+   call to execute the code for the doubler. Arrange such that the 
+   doubler program reads the lines from standard input (STDIN_FILENO).
+   Find out the exit status of the child process in the parent process.
+
+
+2. Modify the reader-doubler program by replacing the doubler with a
+   converter process that modifies each line by converting lower case
+   letters to upper case (no duplication of lines) and also make it
+   follow the client-server model, i.e., the converter does not print
+   out the lines that it converts, but instead, it sends the converted
+   lines back to the reader that prints them to standard output. This
+   also means that two pipes are needed, one per each direction. Employ
+   FIFOs (Unix named pipes) for IPC.
+
+
+3. Modify the reader-doubler program (Task No: 1) further by adding a
+   converter process in between the reader and doubler. These tree
+   processes build up a pipeline where the reader reads lines and
+   forwards the lines to the converter in the  middle. The converter
+   modifies each line by converting lower case letters to upper case and
+   then sends the line to the doubler that duplicates each line to the
+   standard output. Implement each process as a separate program (each
+   program is started from command line, that is, NO fork() in any of
+   the programs!) and employ FIFOs (Unix named pipes) for IPC.
+
+
+4. Modify the example program that uses shared memory and file locks for
+   locking the critical region (program files shm_incr2.c and
+   lock_fcntl.c) in the following way: the program code does not include
+   fork, that is, several independent processes, each started separately
+   to execute the same program code, are able to access the same shared
+   memory area. Make the required modifications both to the file lock
+   initialization as well as to the shared memory initialization (the
+   processes need to use the same path name), so that the same program
+   can be run several times in parallel and the counter becomes
+   correctly incremented.
+
+    The example program files are available at:
+
+      http://www.cs.Helsinki.FI/group/unixtl/vst13/examples/
+
+
+5. Modify the program of the previous task (Task No: 4) further, so that
+   there is a character table (character buffer) after the shared
+   integer counter. Each process writes (stores) in the program's
+   for-loop a certain character (given as command line argument, for
+   example) one after another into the character table using the shared
+   integer counter as the index to the character table (the character
+   is stored nloop times into the table).
+
+
+6. Modify or reimplement the reader and doubler programs (Task No:6 of
+   the Exercice 2) so that you employ TCP sockets for IPC. The doubler
+   acts as the server and the reader as the client that connects to the
+   server. The server IP address is given as a command line argument to
+   the client. Implement the client and server as separate programs and
+   make a concurrent implementation of the server by forking a new child
+   process to serve each new client. Select the port number for the 
+   server yourself in the range 50000-51999.
+
+
+Please comment clearly all your program code and test it!
+
+NOTE:  Programs that use fork() system call are prohibited to test on
+       the "main frame" Unix computers of the IT department (i.e.,
+       kruuna, myntti, mutteri...) as well as on the "main frame" Unix
+       computers of the CS department (i.e., melkki, melkinkari,
+       melkinpaasi, and users). 
+       Preferably use a computer at the CS department that you sitting
+       at. In remote use, as well as when testing distributed
+       applications that run on several nodes, you may select among
+       the three nodes in the department high performance cluster Ukko
+       that are reserved for this purpose: ukko177.hpc.cs.helsinki.fi -
+       ukko179.hpc.cs.helsinki.fi).
+       For testing, also remember to add a sleep call before each
+       the fork call in your program.

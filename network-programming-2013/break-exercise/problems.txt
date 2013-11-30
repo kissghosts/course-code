@@ -1,0 +1,92 @@
+582303 Network Programming
+==========================
+
+Programming Exercise (February 28 - March 11, 2013):
+
+
+For this exercise there is only a single task but it is somewhat more
+demanding than the usual weekly exercise set. This task is intended to
+be completed by Monday, March 11, 2013, at latest (see further
+information on grading below).
+
+Your task is to write a program that communicates with a TCP-based
+server program (service) which has the service name 
+
+UNIX_TL  
+
+and which is running on host
+
+wel-85.cs.Helsinki.FI
+
+Write a program which connects to the UNIX_TL server and follows the
+instructions that the UNIX_TL server will send to your program. You
+have done with the task, once you get a message
+
+"...  Your program has been ACCEPTED ..."
+
+
+UNIX_TL server will not give you all instructions at once, so make sure
+you ALWAYS read (receive) everything it sends to your program and do not
+close any connection prematurely. In addition, note that not everything
+is directly given in the instructions, but sometimes you need to deduce
+or guess what your program is required to do. Careful inspection of how
+UNIX_TL does things should help in many cases.
+
+Please make sure your program can be run autonomously, that is, it
+should require no human intervention at run time (e.g., no user input).
+All input should be given as command line arguments. Also, all IP
+addresses and port numbers should be resolved by the program code.
+
+UNIX_TL will start its execution on Thursday, February 28, 2013, 
+at 16:30 o'clock at latest (may start a bit earlier). There will be an
+announcement on the course web page once the server is running.
+
+Important!!!:
+
+Your program may get accepted only if it runs on one of the CS
+Department computers (the Linux machines at the department) and the home
+directory in use is /home/fs/<login name>/ If you don't have an account
+on these computers, please contact Markku Kojo (kojo@cs.helsinki.fi). It
+is NOT possible to connect to the server outside of the CS Department
+network.
+
+If working remotely, use some of the Ukko cluster nodes at the department
+(ukko177.hpc.cs.helsinki.fi - ukko179.hpc.cs.helsinki.fi).
+
+When asked, send the pathname for the source code of your program. It
+should be relative to your home directory as you will be instructed by
+UNIX_TL. In addition, make sure that the source code for your program is
+implemented in a SINGLE source code file ONLY (E.g., my_program.c) and
+contains no other include's than the standard headers that you need
+(no linking of several modules from separate source code files) and
+compiles with
+
+cc my_program.c  (OR gcc my_program.c)
+
+Follow this instruction even though, in general, it might not be
+reasonable to implement the program in a single source code file
+(module).
+
+Instructor (Markku Kojo) will be available for questions and help on
+this task in room C216 according to the following schedule:
+
+Fri Mar 1 at 10:30 - 11:00
+Mon Mar 4 at 12:15 - 13:00
+Tue Mar 5 at 12:15 - 13:00
+Wed Mar 6 at 12:15 - 13:00
+Fri Mar 8 at 12:15 - 13:00
+
+This task should be completed by March 11, 2013 at 24:00 (EET)
+o'clock.
+
+You will gain course points depending on the time and date your
+program is accepted as follows:
+
+6 points deadline Mon, March  4, at 24:00 (EET)
+5 points deadline Tue, March  5, at 24:00 (EET)
+4 points deadline Wed, March  6, at 24:00 (EET)
+3 points deadline Thu, March  7, at 24:00 (EET)
+2 points deadline Fri, March  8, at 24:00 (EET)
+1 point  deadline Mon, March 11, at 24:00 (EET)
+
+Good luck!

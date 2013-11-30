@@ -1,0 +1,74 @@
+582303 Network Programming
+==========================
+
+Exercise 4  (due on February 13, 2013):
+
+
+1. Modify the client and the server of the task No:6 of exercise 3, so
+   that the client does not read the data from the standard input, but
+   it generates itself the data it sends, and the server simply ignores
+   the data it receives instead of doubling the lines and writing them
+   to the standard output. The total amount of bytes to send is given as
+   a command line argument to the client. In addition, the amount of
+   bytes to send with a single write() call is given as another command
+   line argument. When the client has sent all data, it closes the
+   connection. The maximum number of bytes to read with a single read()
+   call (the read buffer size) is given as a command line argument to
+   the server.
+
+
+2. Add code for measuring the elapsed time of data transfer in the
+   client and server of the previous task (No:1). The client starts the
+   clock prior to the first call to write() and stops the clock when all
+   data has been written. The server starts the clock immediately after
+   the first read() returns and stops the clock when all data has been
+   received. Add also code in the client that measures the elapsed time
+   of establishing the TCP connection.
+
+   Does the elapsed time differ in client and server when you transfer
+   a moderate amount of bytes ( > 100Kbytes but < 1 Mbytes)? If so,
+   explain why? How do the elapsed times differ when you write() and
+   read() a small number of bytes (e.g., 1 byte) with a single system
+   call compared to the case when you write() and read() a larger number
+   of bytes ( >> 1 Kbytes, e.g., ~10Kbytes) with a single system call?
+   Explain why? Do the elapsed times differ with a larger amount of data
+   to transfer ( > 10 Mbytes)? If so, how and explain why? If not, on
+   what conditions the elapsed time could differ?
+
+
+3. Implement the reader and doubler programs of the task No:6 of
+   exercise 3 using datagram sockets (UDP sockets).
+
+
+4. Most hosts with TCP/IP protocol stack implementation have a server
+   called "echo". Implement a client following the client-server
+   paradigm so that it continuously reads a line from standard input and
+   sends it to the "echo" server that echoes the line back to the client
+   without modifying it in any way. The client prints to standard output
+   the lines it receives and reads the next line from standard input
+   once the previous line has been entirely received and printed. Apply
+   the appropriate functions in your client to convert the service name
+   "echo" to the corresponding port number as well as to convert the
+   server hostname (DNS name) to the corresponding IP address. Test your
+   client using echo server on host ukko177.hpc.cs.helsinki.fi as the
+   echo server (ukko177 is the only host at the department running
+   "echo" server.
+
+
+5. Design how two separate processes (A and B) running the shared memory
+   program as modified in for Task No: 5 of the exercise 3 are able to
+   synchonize so that the processes write their own character in turns
+   into the shared character table. For example, if process A writes
+   character 'A' and process B writes character 'B', the result is
+   ABABABABABABAB... Note that a simple mutual exclusion solution would
+   allow an arbitrary order of the characters.
+
+   Your design should be based on some of the IPC mechanisms covered
+   this far on the course (pipe, FIFO, file locks, shared memory), but
+   do not use semaphores as they are not covered on this course.
+   No code needs to be written for this task, just explain your design
+   clearly enough.
+
+
+6. Implement your design in task No:5 and test that it works. 
+

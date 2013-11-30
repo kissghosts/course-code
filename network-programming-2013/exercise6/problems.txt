@@ -1,0 +1,156 @@
+582303 Network Programming
+==========================
+
+Exercise 6 and 7 (due on March 20, 2013):            
+
+Note: both Exercise 6 and 7 will be discussed in the same extended
+      session on March 20, 2013.
+
+Exercise 6:
+-----------
+
+1. a) Write the required code to experimentally find out the largest UDP
+      datagram you can send. What is the result? What happens at the
+      sending end, if the datagram is too big?
+
+   b) Try connecting a UDP socket using connect() call. What
+      happens/should happen in the network when connect() is called?
+      What is the effect of connect() on a UDP socket?
+
+      Send datagrams with such a socket to a host that does not have the
+      corresponding peer (server) to receive the datagrams from the
+      given port. Hint: most hosts at the CS department, except
+      ukko177.hpc.cs.helsinki.fi, do not run echo server. Which error is
+      generated? What happens in the network? 
+
+      Try to find a host that is not connected to the network or a host
+      that has been switched off. What happens (or should/could happen)
+      in the network and in your program, if your program sends datagrams
+      to such a host? Is there any difference, if you send a datagram using
+      UDP socket without calling first connect()?
+
+
+2. Solve experimentally (write the code that is needed to get the
+   answers): 
+
+   a) What is the size of an unnamed Unix pipe (how much data it can
+      hold?
+
+   b) What is the size of a TCP "pipe"? (how much data a TCP connection
+      can hold?
+
+   c) Can you change the size of a TCP "pipe"? If yes, how?
+
+
+3. Add the necessary code into the program of the previous task (No:2b)
+   and find out the maxumum segment size of TCP in use(MSS, TCP_MAXSEG).
+   Try to change the MSS to a smaller value. Does it succeed? If so,
+   can the selected MSS affect the transfer speed over a TCP connection?
+   Why? Explain.
+
+
+4. Get yourself familiar with the Unix system logging: the
+   syslogd daemon and how programs may output messages to system
+   log (syslog(), openlog(), closelog() ). Explain (very) 
+   briefly the principles of syslogd usage.
+
+
+5. Install the example programs of the UNIX Network Programming, 
+   Volume 2:Interprocess Communications" by Stevens in a Linux system
+   (into your home directory). A gzip'ed tar archive is available at
+
+   http://www.cs.helsinki.fi/u/kojo/vst/unpv22e.tar.gz
+
+   Try to compile the basic library (lib directory). What changes, if
+   any, are needed to compile the basic library of the example code?
+
+
+
+Exercise 7  (due on March 20, 2013)
+
+
+1. Look at the threads example program (mutex/prodcons6.c) discussed
+   in the lecture class. The code is available in Stevens book: 
+   Unix Network Programming, Volume 2: Interprocess
+   Communications; the example source code is available at
+   http://www.cs.helsinki.fi/u/kojo/vst/unpv22e.tar.gz
+
+   Modify it so that there is more than one consumer (that is, modify
+   the consume() function). Is there a need for any other changes, for
+   example, in the use of mutexes or condition variables in
+   producer/consumer? Why/Why not?
+
+
+2. Assume we have a concurrent server which has been implemented in such
+   a way that the master server preallocates a number of slave (child)
+   servers by forking n childs each of which inherits the listen/request
+   socket. Each child then waits in accept() (TCP server) or in rec*()
+   operation (UDP server). When a new client arrives (new TCP connection
+   or UDP request message) the underlying system unblocks one of the
+   processes which will then serve the client.
+
+   Now we would like to modify this system in such a way that the slave
+   processes are not statically preallocated. Instead, the preallocation
+   is implemented dynamically, i.e., each time a new client (request)
+   arrives at the master server, it creates a new slave server to serve
+   the client. This new slave does not die after it has served the
+   client: it acts like a master and waits for a new request from a new
+   client and forks a new slave server to serve the new client. In this
+   way up to n (or approx. n) slave servers are created dynamically and
+   after that no more new slave servers are created, but each slave server
+   serves each new request by itself.
+
+  i)   Design two different mechanisms (algorithms) to prevent more than
+       n servers to be allocated; when there are many concurrent
+       clients, the number of servers increases until n servers are
+       active. One algorithm should be based on some IPC mechanism, that
+       is, a specific communication channel is used for IPC between the
+       server processes (e.g., pipe). In the other algorithm, servers do
+       not communicate with each other through a specific communication
+       channel (i.e., no separate communication channel is created
+       between servers).
+
+  ii)  Amend the design such that when for a little while there are
+       fewer clients (or no clients at all), the number of servers
+       decreases. 
+
+  iii) Can you think about a further enhancement that allows you to
+       decide dynamically what is the right number of processes (i.e., n
+       is not fixed in advance)? It's enough you think the enhancement
+       only with either of the mechanisms.
+
+   You need not to write any code. Explaining the design ideas of the
+   algorithms is enough.
+
+
+3&4. Write a brief description of principles in multicasting and how
+     applications can use it (up to two pages is good enough). You may
+     describe the IPv4-related issues only (IPv6 not required). Return
+     your written summary to the instructor.
+
+
+5.  What is the thread-specific data needed for? Why are the facilities
+    described in the course book (Ch. 26.5) and lecture slides needed?
+
+    Wouldn't it be enough if the required memory allocation is done
+    separately and dynamically for each thread (using malloc).
+
+6)  Fill in the class feedback form at 
+
+         https://ilmo.cs.helsinki.fi/kurssit/servlet/Valinta?kieli=en
+
+ 
+      Thank you!
+
+
+Note1: No exersise sessions on weeks 9-11, but the Programming 
+       Exercise starts on Thu Feb 28, 2013. Next (and last) exercise
+       session is on Wed March 20, 2013, when both Exercise 6 and 7 
+       are discussed in an extended session (14-17 o'clock).
+
+Note2: The course exam is possibly to be moved to Friday April 5, 2013
+       at 16-19 o'clock, Exactum, A111
+       (original tentative date being Tuesday, April 9, 2013) 
+       This will be confirmed on Wed March 20, 2013.
+
+       Be active and prepare for success in the exam!

@@ -1,0 +1,86 @@
+582303 Network Programming
+==========================
+
+Exercise 1  (due January 23, 2013):
+
+1. Write a C program that
+
+   a) uses system calls to get the process ID (pid), parent pid (ppid), 
+      process group ID (pgid), and user ID (uid) of the running process
+      and prints this information, and 
+
+   b) prints its environment variables.
+
+   c) write a piece of code that measures the elapsed time for executing
+      a piece of code (see man gettimeofday). Apply your code to measure
+      the elapsed time for executing a single system call in task 1 a) 
+      and for printing the environment variables in task 1 b). Is there
+      any notable difference in elapsed time between the case 1 a) and 
+      1 b)?
+      
+
+2. Write a C program "doubler" that reads lines and writes each line
+   twice to standard output. The pathname of the file to be read is
+   given as a command line argument. If the pathname is not given,
+   the program reads from standard input. Write two versions of the
+   program: 
+   a) a version that uses stdio library functions for reading and 
+      writing, and
+   b) a version that uses corresponding system calls.
+
+   You can make an assumption that the lines in the file are not
+   extremely long, but limited to some predefined size.
+
+
+3. a)  Take a look at the stat() system call (as well as fstat() 
+       and lstat() ) and find out the operation of the calls as
+       well as the meaning of each entry of struct stat. 
+
+   b)  Write a program (or a function) that retreives the type,
+       owner, and size of the "file" for a given file descriptor. 
+       Include code to print out the retreived file attributes.
+
+
+4. Write a C program, which copies the content of a file to standard
+   output, that is, it reads from a file (pathname is given as a command
+   line argument) and writes to a terminal (STDOUT_FILENO). Use system
+   calls (open, read, write, ...) for I/O. If -C option is given to the
+   program, it should catch SIGINT signal (use signal() system call),
+   write an appropriate message to terminal (STDERR_FILENO) informing
+   about the arrival of the signal, and exit. 
+
+   Note: SIGINT signal is sent to the process when ctrl-C is pressed on
+   the keaboard. Test your program with large enough text file or, if
+   necessary, slow down the execution of the process when testing it.
+   sleep() or usleep() might be useful (see man 3 sleep ja man 3
+   usleep).
+
+
+5. a) Read the man page for the sigaction() call and find out meaning of
+      each parameter of the call. Also modify the program of the
+      previous task (No 4) to use sigaction() instead of signal().
+
+   b) Read also the man page on operations for handling the sigset_t
+      struct (sigemptyset, sigfillset, sigaddset, sigdelset,
+      sigismember) and find out the exact use of these operations. 
+
+
+6. What Unix shell commands (or series of Unix commands) you need 
+   to obtain the following information on a Unix system?
+
+   a) To find out all your processes that are currently running.
+
+   b) To get information on processes running a certain program.
+
+   c) To kill 1) a certain process, 2) all your processes running
+      a certain program, or 3) all your processes.
+
+   d) How can you use a Unix system to run your programs so
+      that it least disturbs the other users of the same system.
+      (see man 1 nice)
+
+
+Please comment your code and test it!
+
+Note: It is also very useful to make your code modular as it will
+allow you to reuse some pieces of code in the upcoming exercises.

@@ -1,0 +1,5 @@
+a)  ps -e/ps -A
+b)  ps -C cmdlist
+c)  kill [-signal] pid
+    killall chrome
+    kill -15 -1/kill -9 -1/killall -u usernames
